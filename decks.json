@@ -1,0 +1,43 @@
+{
+  "decks": [
+    {
+      "id": "test-track",
+      "name": "Test Track",
+      "emoji": "🏎️",
+      "color": "#dc2626",
+      "cards": [
+        "Design Studio", "SimCar", "Touchscreen Design Kiosk", "Chevrolet", "65 MPH", "Hairpin Turn",
+        "Banked Turn", "Brake Test", "Suspension Test", "Heat Chamber", "Cold Chamber", "Hill Climb",
+        "Barrier Test", "Crash Test Dummy", "Seat Belts", "Speedometer", "Outdoor Track", "Ride Photo",
+        "Single Rider Line", "Lightning Lane", "Capacity vs. Speed Score", "Rain Test", "Pit Crew",
+        "Racing Stripes", "Test Driver", "Engine Roar", "Tire Squeal", "Fastest Ride at Disney World"
+      ]
+    },
+    {
+      "id": "frozen-ever-after",
+      "name": "Frozen Ever After",
+      "emoji": "❄️",
+      "color": "#0ea5e9",
+      "cards": [
+        "Elsa", "Anna", "Olaf", "Kristoff", "Sven", "Oaken", "Wandering Oaken's Trading Post",
+        "Arendelle", "Norway Pavilion", "Viking Boat", "Ice Palace", "Let It Go",
+        "For the First Time in Forever", "Do You Want to Build a Snowman?", "Summer Snow", "Trolls",
+        "Marshmallow", "Northern Lights", "Snowflakes", "Reindeer", "Carrot Nose", "Ice Magic",
+        "Winter Wonderland", "Frozen Fjord", "Sled Ride", "Coronation Day", "Frozen Sing-Along", "Boat Drop"
+      ]
+    },
+    {
+      "id": "remy",
+      "name": "Remy's Ratatouille Adventure",
+      "emoji": "🐀",
+      "color": "#f59e0b",
+      "cards": [
+        "Remy", "Linguini", "Colette", "Chef Gusteau", "Skinner", "Anton Ego", "Emile", "Ratatouille",
+        "Gusteau's Restaurant", "Anyone Can Cook", "Ratmobile", "Trackless Ride", "Shrinking Down to Rat Size",
+        "France Pavilion", "Eiffel Tower", "Paris", "Chef's Hat", "Baguette", "Croissant", "Cheese Room",
+        "Walk-in Fridge", "Kitchen Chase", "Hot Stove", "Pots and Pans", "Dining Room", "Soup Pot",
+        "Rat Colony", "Giant Kitchen"
+      ]
+    }
+  ]
+}

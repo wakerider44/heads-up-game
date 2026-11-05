@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Heads Up</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Heads Up">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+html,body{margin:0;height:100%;background:#111827;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow:hidden}
+.screen{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);text-align:center}
+.screen.active{display:flex}
+#home{justify-content:flex-start;overflow-y:auto;padding:max(24px,env(safe-area-inset-top)) 16px 32px}
+h1{margin:8px 0 4px;font-size:32px}
+.sub{opacity:.7;margin:0 0 16px}
+.decks{display:grid;gap:12px;width:100%;max-width:520px}
+.deck{border:0;border-radius:18px;padding:18px;font-size:20px;font-weight:700;color:#fff;text-align:left;display:flex;align-items:center;gap:12px}
+.deck small{display:block;font-weight:400;opacity:.85;font-size:13px}
+.deck .e{font-size:34px}
+.opts{width:100%;max-width:520px;margin:18px 0;display:grid;gap:10px;text-align:left}
+.opts label{display:flex;justify-content:space-between;align-items:center;background:#1f2937;border-radius:12px;padding:12px 14px}
+select,textarea,input[type=text]{background:#374151;color:#fff;border:0;border-radius:8px;padding:8px;font-size:16px}
+details{width:100%;max-width:520px;background:#1f2937;border-radius:12px;padding:12px 14px;text-align:left}
+details textarea,details input[type=text]{width:100%;margin-top:8px}
+.btn{border:0;border-radius:14px;padding:14px 22px;font-size:18px;font-weight:700;color:#111827;background:#facc15}
+.btn.alt{background:#374151;color:#fff}
+#play{transition:background .15s;justify-content:center}
+#word{font-size:min(14vw,12vh,84px);font-weight:800;line-height:1.1;padding:0 24px;word-break:break-word}
+#timer{position:absolute;top:max(12px,env(safe-area-inset-top));right:16px;font-size:34px;font-weight:800}
+#score{position:absolute;top:max(12px,env(safe-area-inset-top));left:16px;font-size:24px;font-weight:700}
+#flash{position:absolute;font-size:min(16vw,14vh,96px);font-weight:900;opacity:0;pointer-events:none}
+#pbtns{position:absolute;bottom:max(14px,env(safe-area-inset-bottom));display:flex;gap:12px}
+#cd{font-size:30vh;font-weight:900}
+#hint{max-width:420px;opacity:.85;font-size:18px;margin:8px 0 18px}
+#results ul{list-style:none;padding:0;margin:6px 0;max-height:22vh;overflow-y:auto;font-size:16px}
+.good{color:#4ade80}.bad{color:#fb923c}
+#big{font-size:64px;font-weight:900;margin:0}
+</style>
+</head>
+<body>
+
+<div id="home" class="screen active">
+  <h1>Heads Up</h1>
+  <p class="sub">Pick a deck, then hold the phone to your forehead.</p>
+  <div class="decks" id="decks"></div>
+  <div class="opts">
+    <label>Round length
+      <select id="len"><option value="60">60 sec</option><option value="90" selected>90 sec</option><option value="120">120 sec</option></select>
+    </label>
+    <label>Flip tilt direction <input type="checkbox" id="flip"></label>
+  </div>
+  <details>
+    <summary>Create a custom deck</summary>
+    <input type="text" id="cname" placeholder="Deck name">
+    <textarea id="cwords" rows="6" placeholder="One word or phrase per line"></textarea>
+    <p style="display:flex;gap:8px;margin:10px 0 0"><button class="btn" id="csave">Save deck</button><button class="btn alt" id="cclear">Delete custom decks</button></p>
+  </details>
+</div>
+
+<div id="ready" class="screen">
+  <div style="font-size:64px" id="rEmoji"></div>
+  <h1 id="rName"></h1>
+  <p id="hint">Tilt the screen DOWN toward the floor for a correct answer. Tilt UP toward the ceiling to pass. You can also tap the buttons.</p>
+  <p id="mstat" class="sub"></p>
+  <button class="btn" id="go">Start Round</button>
+  <p><button class="btn alt" id="back1">Back</button></p>
+</div>
+
+<div id="countdown" class="screen"><div id="cd">3</div></div>
+
+<div id="play" class="screen">
+  <div id="score">0</div>
+  <div id="timer">90</div>
+  <div id="word"></div>
+  <div id="flash"></div>
+  <div id="pbtns"><button class="btn alt" id="passBtn">Pass</button><button class="btn" id="okBtn">Correct</button></div>
+</div>
+
+<div id="results" class="screen">
+  <p>Time's up!</p>
+  <p id="big">0</p>
+  <p class="good" id="gl"></p><ul id="gu" class="good"></ul>
+  <p class="bad" id="pl"></p><ul id="pu" class="bad"></ul>
+  <p style="display:flex;gap:10px"><button class="btn" id="again">Play Again</button><button class="btn alt" id="home2">Decks</button></p>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const show = id => { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); $('#' + id).classList.add('active'); };
+const PALETTE = ['#7c3aed', '#059669', '#db2777', '#2563eb'];
+
+let decks = [], current = null;
+let motionOK = false, wakeLock = null;
+let playing = false, armed = false, locked = false;
+let queue = [], word = '', good = [], passed = [], endAt = 0, tick = null;
+
+function getCustom() { try { return JSON.parse(localStorage.getItem('customDecks') || '[]'); } catch (e) { return []; } }
+
+async function loadDecks() {
+  let base = [];
+  try { base = (await (await fetch('decks.json')).json()).decks; } catch (e) {}
+  decks = base.concat(getCustom());
+  const box = $('#decks'); box.innerHTML = '';
+  decks.forEach((d, i) => {
+    const b = document.createElement('button');
+    b.className = 'deck'; b.style.background = d.color || PALETTE[i % PALETTE.length];
+    b.innerHTML = '<span class="e"></span><span><span class="n"></span><small></small></span>';
+    b.querySelector('.e').textContent = d.emoji || '🎴';
+    b.querySelector('.n').textContent = d.name;
+    b.querySelector('small').textContent = d.cards.length + ' cards';
+    b.onclick = () => pick(d);
+    box.appendChild(b);
+  });
+}
+
+function pick(d) {
+  current = d;
+  $('#rEmoji').textContent = d.emoji || '🎴';
+  $('#rName').textContent = d.name;
+  $('#mstat').textContent = '';
+  show('ready');
+}
+
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+async function requestMotion() {
+  try {
+    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+      motionOK = (await DeviceMotionEvent.requestPermission()) === 'granted';
+    } else {
+      motionOK = typeof DeviceMotionEvent !== 'undefined';
+    }
+  } catch (e) { motionOK = false; }
+}
+
+async function getWake() {
+  try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch (e) {}
+}
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && playing) getWake(); });
+
+// Must request permission first, directly inside the tap handler
+$('#go').onclick = async () => {
+  await requestMotion();
+  getWake();
+  if (!motionOK) { $('#mstat').textContent = 'Motion access not granted. Use the on-screen buttons, or reload and allow Motion & Orientation.'; }
+  window.removeEventListener('devicemotion', onMotion);
+  window.addEventListener('devicemotion', onMotion);
+  startCountdown();
+};
+
+function startCountdown() {
+  show('countdown');
+  let n = 3; $('#cd').textContent = n;
+  const t = setInterval(() => {
+    n--;
+    if (n <= 0) { clearInterval(t); startRound(); } else $('#cd').textContent = n;
+  }, 1000);
+}
+
+function nextWord() {
+  if (!queue.length) queue = shuffle(current.cards);
+  word = queue.pop();
+  $('#word').textContent = word;
+}
+
+function startRound() {
+  good = []; passed = []; queue = shuffle(current.cards);
+  $('#score').textContent = 0;
+  $('#play').style.background = current.color || '#2563eb';
+  endAt = Date.now() + parseInt($('#len').value, 10) * 1000;
+  playing = true; locked = false; armed = false;
+  show('play'); nextWord();
+  clearInterval(tick);
+  tick = setInterval(() => {
+    const left = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
+    $('#timer').textContent = left;
+    if (left <= 0) endRound();
+  }, 200);
+  setTimeout(() => { armed = true; }, 800);
+}
+
+function mark(ok) {
+  if (!playing || locked) return;
+  locked = true; armed = false;
+  (ok ? good : passed).push(word);
+  $('#score').textContent = good.length;
+  const f = $('#flash'), w = $('#word');
+  $('#play').style.background = ok ? '#16a34a' : '#ea580c';
+  w.style.visibility = 'hidden';
+  f.textContent = ok ? 'CORRECT!' : 'PASS'; f.style.opacity = 1;
+  if (navigator.vibrate) navigator.vibrate(ok ? 80 : 40);
+  setTimeout(() => {
+    f.style.opacity = 0; w.style.visibility = 'visible';
+    $('#play').style.background = current.color || '#2563eb';
+    if (playing) nextWord();
+    locked = false;
+  }, 700);
+}
+
+// iOS reports gravity with z negative when the screen faces up.
+// Screen facing the floor => z > 0 => correct. Orientation of the phone (portrait/landscape) doesn't matter.
+function onMotion(e) {
+  if (!playing || locked) return;
+  const g = e.accelerationIncludingGravity;
+  if (!g || g.z == null) return;
+  const z = g.z * ($('#flip').checked ? -1 : 1);
+  if (armed) {
+    if (z > 6) mark(true);
+    else if (z < -6) mark(false);
+  } else if (Math.abs(z) < 3) armed = true;
+}
+
+$('#okBtn').onclick = () => mark(true);
+$('#passBtn').onclick = () => mark(false);
+
+function endRound() {
+  playing = false; clearInterval(tick);
+  window.removeEventListener('devicemotion', onMotion);
+  if (wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
+  $('#big').textContent = good.length;
+  $('#gl').textContent = 'Correct (' + good.length + ')';
+  $('#pl').textContent = 'Passed (' + passed.length + ')';
+  [['#gu', good], ['#pu', passed]].forEach(([sel, arr]) => {
+    const ul = $(sel); ul.innerHTML = '';
+    arr.forEach(w => { const li = document.createElement('li'); li.textContent = w; ul.appendChild(li); });
+  });
+  show('results');
+}
+
+$('#again').onclick = () => pick(current);
+$('#home2').onclick = () => show('home');
+$('#back1').onclick = () => show('home');
+
+$('#csave').onclick = () => {
+  const name = $('#cname').value.trim();
+  const cards = $('#cwords').value.split('\n').map(s => s.trim()).filter(Boolean);
+  if (!name || cards.length < 5) { alert('Add a name and at least 5 words.'); return; }
+  const list = getCustom(); list.push({ id: 'c' + Date.now(), name, emoji: '⭐', color: PALETTE[list.length % PALETTE.length], cards });
+  localStorage.setItem('customDecks', JSON.stringify(list));
+  $('#cname').value = ''; $('#cwords').value = '';
+  loadDecks();
+};
+$('#cclear').onclick = () => { if (confirm('Delete all custom decks?')) { localStorage.removeItem('customDecks'); loadDecks(); } };
+
+loadDecks();
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
+</script>
+</body>
+</html>
