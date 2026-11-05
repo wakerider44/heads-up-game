@@ -38,6 +38,21 @@
         "Walk-in Fridge", "Kitchen Chase", "Hot Stove", "Pots and Pans", "Dining Room", "Soup Pot",
         "Rat Colony", "Giant Kitchen"
       ]
+    },
+    {
+      "id": "soarin",
+      "name": "Soarin'",
+      "emoji": "🪂",
+      "color": "#0d9488",
+      "cards": [
+        "Hang Glider", "Flight 5505", "The Land Pavilion", "Lifting Seats", "Giant Dome Screen", "Wind in Your Face",
+        "Scents", "Orange Groves", "40 Inch Height Requirement", "Hidden Mickey", "Single Rider Line", "Lightning Lane",
+        "New York Harbor", "New England Coast", "Portland Head Light", "Grand Canyon West", "Mount Rushmore",
+        "Honolulu", "Hawaiian Hibiscus", "Louisiana Bayou", "Autumn Heartland", "Prairie", "Eagles", "Moose",
+        "Matterhorn", "Greenland Polar Bears", "Sydney Harbour", "Neuschwanstein Castle", "Kilimanjaro Elephants",
+        "Great Wall of China", "Great Pyramids", "Taj Mahal", "Monument Valley", "Lau Islands Fiji",
+        "Iguazu Falls", "Eiffel Tower at Night", "Soarin' Across America", "Soarin' Around the World"
+      ]
     }
   ]
 }
