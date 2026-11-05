@@ -53,6 +53,20 @@
         "Great Wall of China", "Great Pyramids", "Taj Mahal", "Monument Valley", "Lau Islands Fiji",
         "Iguazu Falls", "Eiffel Tower at Night", "Soarin' Across America", "Soarin' Around the World"
       ]
+    },
+    {
+      "id": "seven-dwarfs",
+      "name": "Seven Dwarfs Mine Train",
+      "emoji": "⛏️",
+      "color": "#9333ea",
+      "cards": [
+        "Doc", "Grumpy", "Happy", "Sleepy", "Bashful", "Sneezy", "Dopey", "Snow White", "Evil Queen",
+        "Heigh-Ho", "Whistle While You Work", "Diamond Mine", "Swaying Mine Carts", "Tilting Ride Vehicle",
+        "Sparkling Gems", "Pickaxe", "Mine Shaft", "Dwarfs' Cottage", "Stone Bridge", "Enchanted Forest",
+        "Fantasyland", "Cinderella Castle View", "Interactive Queue", "Audio-Animatronics", "PhotoPass Photo Spot",
+        "Ride Video", "90 Minute Wait", "Lightning Lane", "Magic Kingdom", "Family Roller Coaster",
+        "Singing Dwarfs", "Poisoned Apple", "Magic Mirror", "Coming Home from Work"
+      ]
     }
   ]
 }
