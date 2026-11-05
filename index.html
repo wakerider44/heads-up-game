@@ -17,17 +17,20 @@
 html,body{margin:0;height:100%;background:#111827;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow:hidden}
 .screen{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);text-align:center}
 .screen.active{display:flex}
-#home{justify-content:flex-start;overflow-y:auto;padding:max(24px,env(safe-area-inset-top)) 16px 32px}
-h1{margin:8px 0 4px;font-size:32px}
+#home{justify-content:flex-start;overflow:hidden;padding:max(14px,env(safe-area-inset-top)) 16px 0}
+#home .top{width:100%;max-width:520px;flex:none}
+#home .scroll{width:100%;max-width:520px;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px 0 max(28px,env(safe-area-inset-bottom))}
+h1{margin:4px 0 2px;font-size:28px}
 .sub{opacity:.7;margin:0 0 16px}
-.decks{display:grid;gap:12px;width:100%;max-width:520px}
+#home .top .sub{margin:0 0 8px;font-size:14px}
+.decks{display:grid;gap:12px;width:100%}
 .deck{border:0;border-radius:18px;padding:18px;font-size:20px;font-weight:700;color:#fff;text-align:left;display:flex;align-items:center;gap:12px}
 .deck small{display:block;font-weight:400;opacity:.85;font-size:13px}
 .deck .e{font-size:34px}
-.opts{width:100%;max-width:520px;margin:18px 0;display:grid;gap:10px;text-align:left}
-.opts label{display:flex;justify-content:space-between;align-items:center;background:#1f2937;border-radius:12px;padding:12px 14px}
+.opts{width:100%;margin:6px 0 10px;display:grid;gap:8px;text-align:left}
+.opts label{display:flex;justify-content:space-between;align-items:center;background:#1f2937;border-radius:12px;padding:8px 12px}
 select,textarea,input[type=text]{background:#374151;color:#fff;border:0;border-radius:8px;padding:8px;font-size:16px}
-details{width:100%;max-width:520px;background:#1f2937;border-radius:12px;padding:12px 14px;text-align:left}
+details{width:100%;background:#1f2937;border-radius:12px;padding:12px 14px;text-align:left;margin-top:14px}
 details textarea,details input[type=text]{width:100%;margin-top:8px}
 .btn{border:0;border-radius:14px;padding:14px 22px;font-size:18px;font-weight:700;color:#111827;background:#facc15}
 .btn.alt{background:#374151;color:#fff}
@@ -51,22 +54,26 @@ details textarea,details input[type=text]{width:100%;margin-top:8px}
 <body>
 
 <div id="home" class="screen active">
-  <h1>Heads Up</h1>
-  <p class="sub">Pick a deck, then hold the phone to your forehead.</p>
-  <div class="decks" id="decks"></div>
-  <div class="opts">
-    <label>Round length
-      <select id="len"><option value="45">45 sec</option><option value="60" selected>60 sec</option><option value="90">90 sec</option><option value="120">120 sec</option></select>
-    </label>
-    <label>Flip tilt direction <input type="checkbox" id="flip"></label>
+  <div class="top">
+    <h1>Heads Up</h1>
+    <p class="sub">Pick a deck, then hold the phone to your forehead.</p>
+    <div class="opts">
+      <label>Round length
+        <select id="len"><option value="45">45 sec</option><option value="60" selected>60 sec</option><option value="90">90 sec</option><option value="120">120 sec</option></select>
+      </label>
+      <label>Flip tilt direction <input type="checkbox" id="flip"></label>
+    </div>
   </div>
-  <details>
-    <summary>Create a custom deck</summary>
-    <input type="text" id="cname" placeholder="Deck name">
-    <textarea id="cwords" rows="6" placeholder="One word or phrase per line"></textarea>
-    <p style="display:flex;gap:8px;margin:10px 0 0"><button class="btn" id="csave">Save deck</button><button class="btn alt" id="cclear">Delete custom decks</button></p>
-  </details>
-  <p class="sub" id="ver" style="font-size:12px;margin-top:18px">Version 4</p>
+  <div class="scroll">
+    <div class="decks" id="decks"></div>
+    <details>
+      <summary>Create a custom deck</summary>
+      <input type="text" id="cname" placeholder="Deck name">
+      <textarea id="cwords" rows="6" placeholder="One word or phrase per line"></textarea>
+      <p style="display:flex;gap:8px;margin:10px 0 0"><button class="btn" id="csave">Save deck</button><button class="btn alt" id="cclear">Delete custom decks</button></p>
+    </details>
+    <p class="sub" id="ver" style="font-size:12px;margin-top:18px;text-align:center">Version 5</p>
+  </div>
 </div>
 
 <div id="ready" class="screen">
