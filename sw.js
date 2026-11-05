@@ -1,4 +1,4 @@
-const CACHE = 'headsup-v2';
+const CACHE = 'headsup-v3';
 const FILES = ['./', 'index.html', 'manifest.json', 'decks.json', 'icon.svg', 'app-icon-192.png', 'app-icon-512.png', 'app-icon-maskable-512.png', 'apple-touch-icon-180.png'];
 
 self.addEventListener('install', e => {

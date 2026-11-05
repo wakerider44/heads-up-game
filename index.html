@@ -39,8 +39,12 @@ details textarea,details input[type=text]{width:100%;margin-top:8px}
 #pbtns{position:absolute;bottom:max(14px,env(safe-area-inset-bottom));display:flex;gap:12px}
 #cd{font-size:30vh;font-weight:900}
 #hint{max-width:420px;opacity:.85;font-size:18px;margin:8px 0 18px}
-#results ul{list-style:none;padding:0;margin:6px 0;max-height:22vh;overflow-y:auto;font-size:16px}
-.good{color:#4ade80}.bad{color:#fb923c}
+#results{justify-content:flex-start;overflow-y:auto;padding:max(24px,env(safe-area-inset-top)) 16px 32px}
+#results .lists{width:100%;max-width:520px;text-align:left;margin-top:18px}
+#results .lists p{margin:10px 0 2px;font-weight:700;font-size:18px}
+#results ul{list-style:none;padding:0;margin:0 0 8px;font-size:17px}
+#results li{padding:3px 0}
+.good{color:#4ade80}.bad{color:#fb923c}.late{color:#f87171}
 #big{font-size:64px;font-weight:900;margin:0}
 </style>
 </head>
@@ -52,7 +56,7 @@ details textarea,details input[type=text]{width:100%;margin-top:8px}
   <div class="decks" id="decks"></div>
   <div class="opts">
     <label>Round length
-      <select id="len"><option value="60">60 sec</option><option value="90" selected>90 sec</option><option value="120">120 sec</option></select>
+      <select id="len"><option value="45">45 sec</option><option value="60" selected>60 sec</option><option value="90">90 sec</option><option value="120">120 sec</option></select>
     </label>
     <label>Flip tilt direction <input type="checkbox" id="flip"></label>
   </div>
@@ -77,18 +81,22 @@ details textarea,details input[type=text]{width:100%;margin-top:8px}
 
 <div id="play" class="screen">
   <div id="score">0</div>
-  <div id="timer">90</div>
+  <div id="timer">60</div>
   <div id="word"></div>
   <div id="flash"></div>
   <div id="pbtns"><button class="btn alt" id="passBtn">Pass</button><button class="btn" id="okBtn">Correct</button></div>
 </div>
 
 <div id="results" class="screen">
-  <p>Time's up!</p>
+  <p style="margin:0">Time's up!</p>
   <p id="big">0</p>
-  <p class="good" id="gl"></p><ul id="gu" class="good"></ul>
-  <p class="bad" id="pl"></p><ul id="pu" class="bad"></ul>
-  <p style="display:flex;gap:10px"><button class="btn" id="again">Play Again</button><button class="btn alt" id="home2">Decks</button></p>
+  <p class="sub" id="tally" style="margin:0 0 14px"></p>
+  <p style="display:flex;gap:10px;margin:0"><button class="btn" id="again">Play Again</button><button class="btn alt" id="home2">Decks</button></p>
+  <div class="lists">
+    <p class="good" id="gl"></p><ul id="gu" class="good"></ul>
+    <p class="bad" id="pl"></p><ul id="pu" class="bad"></ul>
+    <p class="late" id="tl"></p><ul id="tu" class="late"></ul>
+  </div>
 </div>
 
 <script>
@@ -99,7 +107,7 @@ const PALETTE = ['#7c3aed', '#059669', '#db2777', '#2563eb'];
 let decks = [], current = null;
 let motionOK = false, wakeLock = null;
 let playing = false, armed = false, locked = false;
-let queue = [], word = '', good = [], passed = [], endAt = 0, tick = null;
+let queue = [], word = '', good = [], passed = [], timedOut = [], endAt = 0, tick = null;
 
 function getCustom() { try { return JSON.parse(localStorage.getItem('customDecks') || '[]'); } catch (e) { return []; } }
 
@@ -171,10 +179,12 @@ function nextWord() {
 }
 
 function startRound() {
-  good = []; passed = []; queue = shuffle(current.cards);
+  good = []; passed = []; timedOut = []; queue = shuffle(current.cards);
   $('#score').textContent = 0;
   $('#play').style.background = current.color || '#2563eb';
-  endAt = Date.now() + parseInt($('#len').value, 10) * 1000;
+  const secs = parseInt($('#len').value, 10);
+  endAt = Date.now() + secs * 1000;
+  $('#timer').textContent = secs;
   playing = true; locked = false; armed = false;
   show('play'); nextWord();
   clearInterval(tick);
@@ -220,17 +230,25 @@ function onMotion(e) {
 $('#okBtn').onclick = () => mark(true);
 $('#passBtn').onclick = () => mark(false);
 
+function fillList(listId, labelId, label, arr) {
+  $(labelId).textContent = label + ' (' + arr.length + ')';
+  const ul = $(listId); ul.innerHTML = '';
+  (arr.length ? arr : ['None']).forEach(w => { const li = document.createElement('li'); li.textContent = w; ul.appendChild(li); });
+}
+
 function endRound() {
+  if (!playing) return;
+  // The card on screen when the clock hits zero (not yet marked) counts as timed out
+  if (!locked && word) timedOut.push(word);
   playing = false; clearInterval(tick);
   window.removeEventListener('devicemotion', onMotion);
   if (wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
   $('#big').textContent = good.length;
-  $('#gl').textContent = 'Correct (' + good.length + ')';
-  $('#pl').textContent = 'Passed (' + passed.length + ')';
-  [['#gu', good], ['#pu', passed]].forEach(([sel, arr]) => {
-    const ul = $(sel); ul.innerHTML = '';
-    arr.forEach(w => { const li = document.createElement('li'); li.textContent = w; ul.appendChild(li); });
-  });
+  $('#tally').textContent = good.length + ' correct \u00b7 ' + passed.length + ' passed \u00b7 ' + timedOut.length + ' timed out';
+  fillList('#gu', '#gl', 'Correct', good);
+  fillList('#pu', '#pl', 'Passed', passed);
+  fillList('#tu', '#tl', 'Timed out', timedOut);
+  $('#results').scrollTop = 0;
   show('results');
 }
 
