@@ -66,6 +66,7 @@ details textarea,details input[type=text]{width:100%;margin-top:8px}
     <textarea id="cwords" rows="6" placeholder="One word or phrase per line"></textarea>
     <p style="display:flex;gap:8px;margin:10px 0 0"><button class="btn" id="csave">Save deck</button><button class="btn alt" id="cclear">Delete custom decks</button></p>
   </details>
+  <p class="sub" id="ver" style="font-size:12px;margin-top:18px">Version 4</p>
 </div>
 
 <div id="ready" class="screen">
@@ -113,7 +114,7 @@ function getCustom() { try { return JSON.parse(localStorage.getItem('customDecks
 
 async function loadDecks() {
   let base = [];
-  try { base = (await (await fetch('decks.json')).json()).decks; } catch (e) {}
+  try { base = (await (await fetch('decks.json', { cache: 'no-store' })).json()).decks; } catch (e) {}
   decks = base.concat(getCustom());
   const box = $('#decks'); box.innerHTML = '';
   decks.forEach((d, i) => {
@@ -268,7 +269,25 @@ $('#csave').onclick = () => {
 $('#cclear').onclick = () => { if (confirm('Delete all custom decks?')) { localStorage.removeItem('customDecks'); loadDecks(); } };
 
 loadDecks();
-if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
+
+// Auto-update: check for a new service worker and fresh decks whenever the app comes to the foreground
+if ('serviceWorker' in navigator) {
+  const hadController = !!navigator.serviceWorker.controller;
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!hadController || reloaded || playing) return;
+    reloaded = true; location.reload();
+  });
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').then(reg => {
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState !== 'visible') return;
+        reg.update().catch(() => {});
+        if (!playing && $('#home').classList.contains('active')) loadDecks();
+      });
+    });
+  });
+}
 </script>
 </body>
 </html>

@@ -20,4 +20,4 @@ Must be served over HTTPS (iOS motion permission + service worker). Options: Git
 Open the HTTPS URL in Safari > Share > Add to Home Screen. Launch from the icon, tap a deck, and allow Motion & Orientation access when prompted.
 
 ## Updating
-Bump `CACHE` in `sw.js` (for example `headsup-v3`) whenever files change so phones refresh.
+Push changes to `main`. Installed apps fetch the latest files whenever they are opened or brought back to the foreground while online (network-first service worker), and fall back to the saved copy offline. The "Version" label on the home screen shows which build a phone is running; bump it in `index.html` when you ship a change. GitHub Pages can take several minutes to publish a push; Cloudflare Pages is usually faster.
