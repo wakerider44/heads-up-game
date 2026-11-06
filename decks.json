@@ -85,6 +85,48 @@
         "Michael Jordan", "Tom Brady", "Simone Biles", "Usain Bolt", "Tiger Woods",
         "Fantasy Football", "Tailgate", "Gatorade Shower", "Team Mascot"
       ]
+    },
+    {
+      "id": "fbs-football",
+      "name": "College Football (FBS)",
+      "emoji": "🏈",
+      "color": "#1e40af",
+      "cards": [
+        "Boston College Eagles", "California Golden Bears", "Clemson Tigers", "Duke Blue Devils", "Florida State Seminoles",
+        "Georgia Tech Yellow Jackets", "Louisville Cardinals", "Miami Hurricanes", "NC State Wolfpack", "North Carolina Tar Heels",
+        "Pittsburgh Panthers", "SMU Mustangs", "Stanford Cardinal", "Syracuse Orange", "Virginia Cavaliers",
+        "Virginia Tech Hokies", "Wake Forest Demon Deacons",
+        "Army Black Knights", "Charlotte 49ers", "East Carolina Pirates", "Florida Atlantic Owls", "Memphis Tigers",
+        "Navy Midshipmen", "North Texas Mean Green", "Rice Owls", "Temple Owls", "Tulane Green Wave",
+        "Tulsa Golden Hurricane", "UAB Blazers", "USF Bulls", "UTSA Roadrunners",
+        "Arizona Wildcats", "Arizona State Sun Devils", "Baylor Bears", "BYU Cougars", "Cincinnati Bearcats",
+        "Colorado Buffaloes", "Houston Cougars", "Iowa State Cyclones", "Kansas Jayhawks", "Kansas State Wildcats",
+        "Oklahoma State Cowboys", "TCU Horned Frogs", "Texas Tech Red Raiders", "UCF Knights", "Utah Utes",
+        "West Virginia Mountaineers",
+        "Illinois Fighting Illini", "Indiana Hoosiers", "Iowa Hawkeyes", "Maryland Terrapins", "Michigan Wolverines",
+        "Michigan State Spartans", "Minnesota Golden Gophers", "Nebraska Cornhuskers", "Northwestern Wildcats",
+        "Ohio State Buckeyes", "Oregon Ducks", "Penn State Nittany Lions", "Purdue Boilermakers", "Rutgers Scarlet Knights",
+        "UCLA Bruins", "USC Trojans", "Washington Huskies", "Wisconsin Badgers",
+        "Delaware Blue Hens", "FIU Panthers", "Jacksonville State Gamecocks", "Kennesaw State Owls", "Liberty Flames",
+        "Middle Tennessee Blue Raiders", "Missouri State Bears", "New Mexico State Aggies", "Sam Houston Bearkats",
+        "Western Kentucky Hilltoppers",
+        "Notre Dame Fighting Irish", "UConn Huskies",
+        "Akron Zips", "Ball State Cardinals", "Bowling Green Falcons", "Buffalo Bulls", "Central Michigan Chippewas",
+        "Eastern Michigan Eagles", "Kent State Golden Flashes", "Miami (Ohio) RedHawks", "Ohio Bobcats",
+        "Sacramento State Hornets", "Toledo Rockets", "UMass Minutemen", "Western Michigan Broncos",
+        "Air Force Falcons", "Hawai'i Rainbow Warriors", "Nevada Wolf Pack", "New Mexico Lobos", "North Dakota State Bison",
+        "Northern Illinois Huskies", "San José State Spartans", "UNLV Rebels", "UTEP Miners", "Wyoming Cowboys",
+        "Boise State Broncos", "Colorado State Rams", "Fresno State Bulldogs", "Oregon State Beavers",
+        "San Diego State Aztecs", "Texas State Bobcats", "Utah State Aggies", "Washington State Cougars",
+        "Alabama Crimson Tide", "Arkansas Razorbacks", "Auburn Tigers", "Florida Gators", "Georgia Bulldogs",
+        "Kentucky Wildcats", "LSU Tigers", "Mississippi State Bulldogs", "Missouri Tigers", "Oklahoma Sooners",
+        "Ole Miss Rebels", "South Carolina Gamecocks", "Tennessee Volunteers", "Texas Longhorns", "Texas A&M Aggies",
+        "Vanderbilt Commodores",
+        "App State Mountaineers", "Arkansas State Red Wolves", "Coastal Carolina Chanticleers", "Georgia Southern Eagles",
+        "Georgia State Panthers", "James Madison Dukes", "Louisiana Ragin' Cajuns", "Louisiana Tech Bulldogs",
+        "Marshall Thundering Herd", "Old Dominion Monarchs", "South Alabama Jaguars", "Southern Miss Golden Eagles",
+        "Troy Trojans", "UL Monroe Warhawks"
+      ]
     }
   ]
 }
