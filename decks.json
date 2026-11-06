@@ -67,6 +67,24 @@
         "Ride Video", "90 Minute Wait", "Lightning Lane", "Magic Kingdom", "Family Roller Coaster",
         "Singing Dwarfs", "Poisoned Apple", "Magic Mirror", "Coming Home from Work"
       ]
+    },
+    {
+      "id": "sports",
+      "name": "Sports",
+      "emoji": "🏆",
+      "color": "#be123c",
+      "cards": [
+        "Touchdown", "Hail Mary", "Fumble", "Slam Dunk", "Pick and Roll", "Hat Trick", "Bicycle Kick",
+        "Free Kick", "Offside", "Penalty Shootout", "Home Run", "Grand Slam", "Hole in One", "Photo Finish",
+        "Pole Position", "Instant Replay", "Overtime", "Waiver Wire",
+        "Super Bowl", "World Cup", "World Series", "Stanley Cup", "NBA Finals", "Wimbledon", "Olympic Games",
+        "Tour de France", "Daytona 500", "Kentucky Derby", "March Madness",
+        "Dallas Cowboys", "Texas Rangers", "Dallas Mavericks", "Dallas Stars", "FC Dallas", "Real Madrid",
+        "Manchester United",
+        "Lionel Messi", "Cristiano Ronaldo", "Patrick Mahomes", "LeBron James", "Serena Williams",
+        "Michael Jordan", "Tom Brady", "Simone Biles", "Usain Bolt", "Tiger Woods",
+        "Fantasy Football", "Tailgate", "Gatorade Shower", "Team Mascot"
+      ]
     }
   ]
 }
