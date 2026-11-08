@@ -168,6 +168,26 @@
         "Abilene Christian Wildcats", "Austin Peay Governors", "Central Arkansas Bears", "Eastern Kentucky Colonels",
         "North Alabama Lions", "Tarleton State Texans", "West Florida Argonauts", "West Georgia Wolves"
       ]
+    },
+    {
+      "id": "wdw-snacks",
+      "name": "Disney World Snacks",
+      "emoji": "🍍",
+      "color": "#db2777",
+      "cards": [
+        "Dole Whip", "Dole Whip Float", "Mickey Premium Ice Cream Bar", "Mickey Ice Cream Sandwich",
+        "Mickey Pretzel with Cheese Sauce", "Smoked Turkey Leg", "Popcorn Cart", "Churros",
+        "Cinnamon-Glazed Almonds", "Mickey Candy Apple", "Mickey Waffle", "Mickey Rice Krispie Treat",
+        "Cinnamon Roll", "Chocolate Chip Cookie",
+        "Corn Dog Nuggets", "Cheeseburger Egg Rolls", "Cheshire Cat Tail", "Waffle Sandwich", "Totchos",
+        "Ronto Wrap", "Blue Milk", "Grilled Corn on the Cob", "Jumbo Pretzel", "Croque Glacé",
+        "Na'vi-sized Pretzel", "Eight Spoon Mac & Cheese", "Seasoned Fries", "Rapunzel Sundae", "Aurora Cone",
+        "Maleficent Cone", "Mickey Brownie Sundae", "Hades Ice Cream Float",
+        "Aloha Isle", "Sunshine Tree Terrace", "Liberty Square Market", "Prince Eric's Village Market",
+        "Storybook Treats", "Casey's Corner", "Sleepy Hollow", "Hollywood Scoops", "Woody's Lunchbox",
+        "Ronto Roasters", "Pongu Pongu", "Harambe Fruit Market", "L'Artisan des Glaces", "Germany Pavilion",
+        "Joy of Tea", "Snack Credit"
+      ]
     }
   ]
 }
