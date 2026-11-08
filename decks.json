@@ -188,6 +188,26 @@
         "Ronto Roasters", "Pongu Pongu", "Harambe Fruit Market", "L'Artisan des Glaces", "Germany Pavilion",
         "Joy of Tea", "Snack Credit"
       ]
+    },
+    {
+      "id": "dvc",
+      "name": "Disney Vacation Club",
+      "emoji": "🏰",
+      "color": "#b45309",
+      "cards": [
+        "Animal Kingdom Villas", "Bay Lake Tower", "Beach Club Villas", "BoardWalk Villas", "Boulder Ridge Villas",
+        "Copper Creek Villas & Cabins", "Old Key West", "Polynesian Villas & Bungalows", "Riviera Resort",
+        "Saratoga Springs", "Grand Floridian Villas", "Cabins at Fort Wilderness", "Aulani", "Hilton Head Island",
+        "Vero Beach", "Grand Californian Villas", "Villas at Disneyland Hotel",
+        "Vacation Points", "Use Year", "Home Resort", "Home Resort Priority", "11-Month Window", "7-Month Window",
+        "Banking Points", "Borrowing Points", "Annual Dues", "Points Chart", "Member Services", "Wait List",
+        "Member Card", "Member Getaways", "Disney Collection Exchange", "Direct Purchase", "Resale Contract",
+        "Right of First Refusal",
+        "Studio", "One-Bedroom Villa", "Two-Bedroom Villa", "Grand Villa", "Treehouse Villa", "Bungalow",
+        "Member Lounge", "Top of the World Lounge", "Moonlight Magic", "Welcome Home Weeks", "Member Discounts",
+        "Discovery Desk", "Disney Cruise Line", "Adventures by Disney", "Skyliner Access", "Kitchen in Your Villa",
+        "Tour at a Resort"
+      ]
     }
   ]
 }
